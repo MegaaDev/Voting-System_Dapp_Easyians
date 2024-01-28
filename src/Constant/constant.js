@@ -1,39 +1,16 @@
-const contractAddress = ""; //Replace "" with Contract Address that you get once Smart Contract is deployed. Refer README.md. Eg: "0xf9EEff6292445a44f2f37d265787AF20dD3DFA50";
+const contractAddress = "0xa33CbEa4584C034aba2C08EFc7a44061Db8757b3"; //Replace "" with Contract Address that you get once Smart Contract is deployed. Refer README.md. Eg: "0xf9EEff6292445a44f2f37d265787AF20dD3DFA50";
 
 const contractAbi = [
   {
-    inputs: [
-      {
-        internalType: "address[]",
-        name: "_voters",
-        type: "address[]",
-      },
-      {
-        internalType: "string[]",
-        name: "_candidateNames",
-        type: "string[]",
-      },
-      {
-        internalType: "uint256",
-        name: "_durationInMinutes",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
   },
   {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string",
-      },
-    ],
-    name: "addCandidate",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
+    anonymous: false,
+    inputs: [],
+    name: "updateVote",
+    type: "event",
   },
   {
     inputs: [
@@ -57,6 +34,57 @@ const contractAbi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "ct",
+        type: "uint256",
+      },
+    ],
+    name: "decrypt",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "mg",
+        type: "uint256",
+      },
+    ],
+    name: "encrypt",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "generate_keys",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -94,9 +122,32 @@ const contractAbi = [
         type: "uint256",
       },
       {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
         internalType: "int256",
         name: "",
         type: "int256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getPublicKey",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
@@ -130,7 +181,7 @@ const contractAbi = [
   },
   {
     inputs: [],
-    name: "publicId",
+    name: "modVal",
     outputs: [
       {
         internalType: "uint256",
@@ -139,6 +190,42 @@ const contractAbi = [
       },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "publicKey",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "_voters",
+        type: "address[]",
+      },
+      {
+        internalType: "string[]",
+        name: "_candidateNames",
+        type: "string[]",
+      },
+      {
+        internalType: "uint256",
+        name: "_durationInMinutes",
+        type: "uint256",
+      },
+    ],
+    name: "startVoting",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -168,32 +255,6 @@ const contractAbi = [
         internalType: "int256",
         name: "",
         type: "int256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "votingEnd",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "votingStart",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
       },
     ],
     stateMutability: "view",

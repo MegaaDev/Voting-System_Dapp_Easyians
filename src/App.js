@@ -5,6 +5,9 @@ import Login from "./Components/Login";
 import Finished from "./Components/Finished";
 import Connected from "./Components/Connected";
 import "./App.css";
+import { encrypt } from "./utils/encrypt";
+import Navbar from "./Components/Navbar";
+import Admin from "./Components/Admin";
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -15,9 +18,10 @@ function App() {
   const [candidates, setCandidates] = useState([]);
   const [number, setNumber] = useState("");
   const [CanVote, setCanVote] = useState(-1);
+  const [publicKey, setPublicKey] = useState({ publicKey: 0, modVal: 0 });
 
   useEffect(() => {
-    getCandidates();
+    // getCandidates();
     getRemainingTime();
     getCurrentStatus();
     if (window.ethereum) {
@@ -33,6 +37,22 @@ function App() {
       }
     };
   });
+  useEffect(() => {
+    listenToVoteChnage();
+  }, []);
+  async function listenToVoteChnage() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    const contractInstance = new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      signer
+    );
+    contractInstance.on("updateVote", async () => {
+      await getCandidates();
+    });
+  }
 
   async function vote() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -43,8 +63,13 @@ function App() {
       contractAbi,
       signer
     );
+    const encryptNumber = encrypt(
+      publicKey.publicKey,
+      number,
+      publicKey.modVal
+    );
 
-    const tx = await contractInstance.vote(number);
+    const tx = await contractInstance.vote(encryptNumber);
     await tx.wait();
     canVote();
   }
@@ -60,11 +85,15 @@ function App() {
         signer
       );
       const options = await contractInstance.getPublicId();
+      const publicKey = ethers.BigNumber.from(options[0]).toNumber();
+      const modVal = ethers.BigNumber.from(options[1]).toNumber();
+      setPublicKey({
+        publicKey: publicKey,
+        modVal: modVal,
+      });
 
-      const option1 = ethers.BigNumber.from(options[0]).toNumber();
-      const option2 = ethers.BigNumber.from(options[1]).toNumber();
+      const option2 = ethers.BigNumber.from(options[2]).toNumber();
       setCanVote(option2);
-      console.log(option1, option2);
     } catch (err) {
       setCanVote(1);
       console.error(err);
@@ -152,9 +181,14 @@ function App() {
     setNumber(e.target.value);
   }
 
+  const [isHost, setHost] = useState(false);
+
   return (
     <div className="App">
-      {votingStatus ? (
+      <Navbar setHost={setHost} />
+      {isHost ? (
+        <Admin />
+      ) : votingStatus ? (
         isConnected ? (
           <Connected
             account={account}
