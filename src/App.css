@@ -48,6 +48,15 @@
   font-weight: 700;
 }
 
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .Admin {
   position: relative;
   display: flex;

@@ -3,8 +3,16 @@ function Navbar(props) {
     <div className="nav">
       <h1>EASYIANS</h1>
       <div className="links">
-        <p>About</p>
-        <p>Github</p>
+        <a href="https://drive.google.com/drive/u/0/home">
+          <p>About</p>
+        </a>
+
+        <a
+          className="atag"
+          href="https://github.com/MegaaDev/Voting-System_Dapp_Easyians"
+        >
+          <p>Github</p>
+        </a>
         <p
           className="host"
           onClick={() => {

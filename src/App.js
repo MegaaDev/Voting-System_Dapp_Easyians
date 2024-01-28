@@ -21,7 +21,7 @@ function App() {
   const [publicKey, setPublicKey] = useState({ publicKey: 0, modVal: 0 });
 
   useEffect(() => {
-    // getCandidates();
+    getCandidates();
     getRemainingTime();
     getCurrentStatus();
     if (window.ethereum) {
@@ -37,22 +37,22 @@ function App() {
       }
     };
   });
-  useEffect(() => {
-    listenToVoteChnage();
-  }, []);
-  async function listenToVoteChnage() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    const contractInstance = new ethers.Contract(
-      contractAddress,
-      contractAbi,
-      signer
-    );
-    contractInstance.on("updateVote", async () => {
-      await getCandidates();
-    });
-  }
+  // useEffect(() => {
+  //   listenToVoteChnage();
+  // }, []);
+  // async function listenToVoteChnage() {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   await provider.send("eth_requestAccounts", []);
+  //   const signer = provider.getSigner();
+  //   const contractInstance = new ethers.Contract(
+  //     contractAddress,
+  //     contractAbi,
+  //     signer
+  //   );
+  //   contractInstance.on("updateVote", async () => {
+  //     await getCandidates();
+  //   });
+  // }
 
   async function vote() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -130,7 +130,6 @@ function App() {
       signer
     );
     const status = await contractInstance.getVotingStatus();
-    console.log(status);
     setVotingStatus(status);
   }
 
@@ -186,7 +185,7 @@ function App() {
   return (
     <div className="App">
       <Navbar setHost={setHost} />
-      {isHost ? (
+      {false ? (
         <Admin />
       ) : votingStatus ? (
         isConnected ? (

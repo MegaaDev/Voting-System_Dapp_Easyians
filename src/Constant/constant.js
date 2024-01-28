@@ -1,4 +1,4 @@
-const contractAddress = "0xa33CbEa4584C034aba2C08EFc7a44061Db8757b3"; //Replace "" with Contract Address that you get once Smart Contract is deployed. Refer README.md. Eg: "0xf9EEff6292445a44f2f37d265787AF20dD3DFA50";
+const contractAddress = ""; //Replace "" with Contract Address that you get once Smart Contract is deployed. Refer README.md. Eg: "0xf9EEff6292445a44f2f37d265787AF20dD3DFA50";
 
 const contractAbi = [
   {
