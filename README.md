@@ -43,3 +43,5 @@ Once the contract is uploaded to the blockchain, copy the contract address and c
 ```shell
 npm start
 ```
+
+**CONTRIBUTORS**: [Ashwin Rajagopal](https://github.com/ashw1nr), [Vishrudh Raj](https://github.com/vishrudh-raj-rs-14), [Lok Visnu](https://github.com/lokvisnu)
