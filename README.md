@@ -1,6 +1,6 @@
 # Decentralized Voting Application by Team - Easyians , Pragyan Hackathon 2024
 
-This is a demo application to implement voting in solidity smart contract using ReactJS and CosVM
+This is a application to implement voting in solidity smart contract using ReactJS and deployed it in CosVM. Links about the project : [One Pager doc](https://drive.google.com/file/d/1tbwc807qruMyYlEh6nAxbm3HY7A_cn0w/view?usp=sharing) , [Security Analysis](https://drive.google.com/file/d/1QFN4wLbAdakBIKRPguobbCzNcozU53UU/view?usp=sharing) , [Syatem Architecture](https://docs.google.com/document/d/1q3GgZ43-C4jlHRFa-QgjQS5G0FENmNxdheZnpyt4abE/edit#heading=h.y2d61vcme1ed) 
 
 ## Installation
 
